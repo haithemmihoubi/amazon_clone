@@ -1,8 +1,11 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/router.dart';
 import 'package:flutter/material.dart';
 
+import 'features/auth/screens/auth_screen.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,27 +14,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter',
-      theme: ThemeData(
-        scaffoldBackgroundColor: GlobalVariables.backgroundColor,
-        colorScheme: const ColorScheme.light(
-          primary: GlobalVariables.secondaryColor,
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter',
+        theme: ThemeData(
+          scaffoldBackgroundColor: GlobalVariables.backgroundColor,
+          colorScheme: const ColorScheme.light(
+            primary: GlobalVariables.secondaryColor,
+          ),
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+          ),
+          iconTheme: const IconThemeData(color: Colors.black),
         ),
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
-
-        ),
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Flutter'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
-    );
+        onGenerateRoute: (settings) => Routers.generateRoute(settings),
+        home: const AuthScreen());
   }
 }
