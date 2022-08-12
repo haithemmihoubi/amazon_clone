@@ -1,3 +1,4 @@
+import 'package:amazon_clone/common/widgets/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_text_field.dart';
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,11 @@ class _AuthScreenState extends State<AuthScreen> {
   final _signinFormKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
 
+  final passwordController1 = TextEditingController();
+  final emailController1 = TextEditingController();
+
+  final passwordController = TextEditingController();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -61,7 +65,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         });
                       }),
                 ),
-                if (_auth == Auth.signup)
+                if(_auth == Auth.signup)
                   Form(
                       key: _signupFormKey,
                       child: Column(
@@ -81,8 +85,19 @@ class _AuthScreenState extends State<AuthScreen> {
                           CustomTextField(
                               controller: passwordController,
                               hint: "Enter your password"),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomButton(
+                              text: 'signup',
+                              onTap: () {
+                                if (_signupFormKey.currentState!.validate()) {
+                                  print("valid");
+                                }
+                              }),
                         ],
                       )),
+
                 ListTile(
                   title: const Text(
                     "Sign in",
@@ -98,6 +113,32 @@ class _AuthScreenState extends State<AuthScreen> {
                         });
                       }),
                 ),
+                if(_auth == Auth.signin)
+                Form(
+                    key: _signinFormKey,
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                            controller: emailController,
+                            hint: "Enter your email"),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                            controller: passwordController,
+                            hint: "Enter your password"),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomButton(
+                            text: 'signup',
+                            onTap: () {
+                              if (_signinFormKey.currentState!.validate()) {
+                                print("valid");
+                              }
+                            }),
+                      ],
+                    )),
               ],
             ),
           ),
